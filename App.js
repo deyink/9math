@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomePage from './screens/HomePage';
 import SplashScreen from './screens/SplashScreen';
+import SplashScreen1 from './screens/SplashScreen1';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,8 +13,9 @@ export default function App() {
     <NavigationContainer>
        <StatusBar style="auto" />
       <Stack.Navigator screenOptions={{headerShown:false}} >
-     
-        <Stack.Screen name='SplashSCreen' component={SplashScreen}  />
+        <Stack.Screen name='SplashScreen' component={SplashScreen}  />
+        <Stack.Screen name='SplashScreen1' component={SplashScreen1} />
+        <Stack.Screen name='HomePage' component={HomePage} />
       </Stack.Navigator>
       </NavigationContainer>
   );
