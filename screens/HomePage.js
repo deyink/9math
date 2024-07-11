@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { hs, ms, vs } from './Metrics'
+import { ScrollView } from 'react-native-web'
 
 const HomePage = () => {
   const [inputFormat, setInputFormat] = useState('decimal')
@@ -111,13 +112,25 @@ function roundToSignificantDigits(number, significantDigits) {
 
 }
 
-
+const renderOptionItem = ({ item }) => ( 
+  <TouchableOpacity 
+      style={Styles.optionItem} 
+      onPress={() => { 
+          setInputFormat(item.value); 
+          setModalVisible(false); 
+      }} 
+  > 
+      <Text style={Styles.optionText}>{item.label}</Text> 
+  </TouchableOpacity> 
+); 
 
   return (
-    <View style={StyleSheet.bg} >
+    <ScrollView>
+    <View style={Styles.bg} >
       <Text style={Styles.head} >9MATH</Text>
       
     </View>
+    </ScrollView>
   )
 }
 
