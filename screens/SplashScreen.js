@@ -11,7 +11,7 @@ const SplashScreen= ({navigation})=> {
     
     return (
       <View style={Styles.bg} >
-        <TouchableOpacity style={Styles.skp} >
+        <TouchableOpacity onPress={()=>navigation.navigate('HomePage')} style={Styles.skp} >
         <Text style={Styles.skpTxt} > Skip </Text>
         </TouchableOpacity>
         <View style={Styles.proto} >

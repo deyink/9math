@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { hs, ms, vs } from './Metrics'
-import { ScrollView } from 'react-native-web'
+import { ScrollView, TouchableOpacity } from 'react-native-web'
 
 const HomePage = () => {
   const [inputFormat, setInputFormat] = useState('decimal')
@@ -128,6 +128,11 @@ const renderOptionItem = ({ item }) => (
     <ScrollView>
     <View style={Styles.bg} >
       <Text style={Styles.head} >9MATH</Text>
+      <TouchableOpacity>
+        <Text>
+          {inputFormat}
+        </Text>
+      </TouchableOpacity>
       
     </View>
     </ScrollView>
