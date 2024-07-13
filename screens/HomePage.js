@@ -1,11 +1,12 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TextInput, inputNumber } from 'react-native'
 import React, { useState } from 'react'
 import { hs, ms, vs } from './Metrics'
-import { ScrollView, TouchableOpacity } from 'react-native-web'
+import { ScrollView, TouchableOpacity } from 'react-native'
+import numberToWords from 'number-to-words'
 
-const HomePage = () => {
+const HomePage = ()=> {
   const [inputFormat, setInputFormat] = useState('decimal')
-  const [inputDigit, setInputDIgit ] = useState('')
+  const [inputDigit, setInputDigit ] = useState('')
   const [decimal, setDecimal ] = useState('')
   const [binary, setBinary ] = useState('')
   const [octal, setOctal] = useState('')
@@ -18,7 +19,7 @@ const HomePage = () => {
   const [numerator, setNumerator] = useState('0')
   const [denominator, setDenominator] = useState('0')
   const [inWord, setInWord] = useState('')
-  const [modalVisible, setModalVisible] = useState('')
+  const [modalVisible, setModalVisible] = useState(false)
   let [options] = useState([
     {lable: 'Binary', value: 'binary' },
     {lable: 'Decimal', value: 'decimal' },
@@ -80,7 +81,7 @@ const HomePage = () => {
 
   const floatToFraction = (number)=>{
     const tolerance = 0.000001 ;
-    let  numeratorValue = 1 ;
+    let  numeratorValue = 1 ; 
     let denominatorValue = 1 ;
     let error = number - numeratorValue / denominatorValue ;
 
@@ -97,7 +98,7 @@ const HomePage = () => {
   function roundToKthInteger(number, k) { 
     const multiplier = Math.pow(10, k); 
     return Math.round(number * multiplier) / multiplier; 
-} 
+} ;
 
 function roundToSignificantDigits(number, significantDigits) { 
     if (significantDigits <= 0) return 0; 
@@ -125,14 +126,42 @@ const renderOptionItem = ({ item }) => (
 ); 
 
   return (
-    <ScrollView>
-    <View style={Styles.bg} >
+    <ScrollView style={Styles.bg} >
+    
       <Text style={Styles.head} >9MATH</Text>
-      <TouchableOpacity>
+      
+      <TouchableOpacity onPress={()=>setModalVisible(true)} >
         <Text>
-          {inputFormat}
+        {inputFormat}
         </Text>
       </TouchableOpacity>
+      <View style={Styles.section}> 
+                    <Text style={Styles.label}> 
+                        Enter {inputFormat} Number 
+                    </Text> 
+                    <View style={Styles.inputContainer}> 
+                        <TextInput 
+                            style={Styles.input} 
+                            keyboardType={ 
+                                (inputFormat !== 'decimal') ? "default" : "numeric"
+                            } 
+                            value={inputNumber} 
+                            onChangeText={(text) => { 
+                                if (inputFormat === 'decimal') { 
+                                    setDecimal(text); 
+                                    setInputDigit(text); 
+                                } else { 
+                                    setInputDigit(text); 
+                                } 
+                            }} 
+                        /> 
+                              <TouchableOpacity 
+                            style={Styles.btn} 
+                            onPress={handleConvert} 
+                        > 
+                            <Text style={Styles.btnText}>Convert</Text> 
+                        </TouchableOpacity> 
+            </View>
       
     </View>
     </ScrollView>
